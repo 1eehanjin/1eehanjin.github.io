@@ -1,6 +1,5 @@
 ---
 title:  "깃허브"
-date:   2021-08-05 10:30:37 -0900
 excerpt : 깃허브 사용법 정리 
 categories:
   - 기타
@@ -10,25 +9,118 @@ tags:
 toc: true
 toc_sticky: true
 ---
-# 1. git과 github
+# 1. 개념
 
-- git: 분산형 버전 관리 시스템
+## git
 
-- github: git을 사용하여 서버에 저장하고 공유하기 위한 사이트
+분산형 버전 관리 시스템
+
+
+## github
+
+git을 사용하여 서버에 저장하고 공유하기 위한 사이트
+
+
+## 저장소 (Repository)
 
 - 원격 저장소(Remote Repository): 파일이 서버에서 관리되고 여러사람이 공유할 수 있음
 
 - 로컬 저장소: 내 pc에 저장
   새로운 로컬 저장소를 만들거나, 이미 있는 원격 저장소를 복사해서 만듬
 
-> ## 커밋
-> - 파일 및 폴더의 추가/변경 사항을 기록하는 것
-> - 각 커밋에는 영문/숫자로 이뤄진 고유 이름이 붙음, 이거로 구별
-> - git에서 권장하는 메시지 형식
-> ```
-> 1번째 줄 : 커밋 내의 변경 내용을 요약
-> 2번째 줄 : 빈 칸
-> 3번째 줄 : 변경한 이유
->  ```
+## 커밋
+- 파일 및 폴더의 추가/변경 사항을 기록하는 것
+```
+git commit -m "커밋 메시지"
+```
+- 각 커밋에는 영문/숫자로 이뤄진 고유 이름이 붙음, 이거로 구별
+- git에서 권장하는 메시지 형식
+```
+1번째 줄 : 커밋 내의 변경 내용을 요약
+2번째 줄 : 빈 칸
+3번째 줄 : 변경한 이유
+```
+
+## 작업트리 / 인덱스 / 스테이징
+
+- 작업트리: 저장소에 저장되지 않은 변경 내용
+
+- 인덱스: 저장소와 작업트리 사이의 공간
+
+- 스테이징(stage): 작업 트리에 있는 변경 내용을 저장소에 바로 기록하는 것이 아니라 사이 공간인 인덱스에 기록하는 것
+```
+git add .
+git add <파일명>
+```
 
 
+- 인덱스와 스테이징을 통해 변경 내용 중 어떤 것을 커밋할 것인지 고를 수 있다.
+
+# 2. 사용법
+
+## 깃허브 튜토리얼
+
+- *[깃허브 튜토리얼](https://cselabnotes.com/kr/2021/03/25/31/)*
+
+- git 저장소로 초기화
+```
+git init
+```
+- 로컬 커밋
+- 로컬 저장소와 리모트 저장소 연결
+```
+git remote add origin https://github.com/1eehanjin/<리포지토리경로(.git)>
+```
+
+- 리모트 저장소에 로컬 커밋 올리기
+```
+git push <원격저장소 이름> <로컬 브랜치 이름>
+git push origin master
+```
+
+- 해당 저장소에 있는 리모트 저장소에 대한 정보 조회하기
+```
+git remote -v
+```
+## 자주 사용하는 명령어
+- *[깃 명령어 모음](https://velog.io/@delilah/GitHub-Git-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%AA%A8%EC%9D%8C)*
+- 저장소 복제/다운로드
+```
+git clone <https:... URL>
+```
+- 파일 상태 확인
+```
+git status
+```
+- 브랜치 목록
+```
+git branch
+```
+- 브랜치 생성
+```
+git branch <브랜치 이름>
+```
+- 브랜치 이동
+```
+git chckout <브랜치 이름>
+```
+- 원격 git 프로젝트의 현재 상태를 다운받고(fetch) 로컬 브랜치에 병합(merge)
+```
+git pull <원격 저장소 이름> <브랜치 이름>
+git pull
+```
+- 원격 저장소의 git 프로젝트의 현 상태 다운로드
+```
+git fetch origin
+```
+- 현재 브랜치에 다른 브랜치의 수정사항 병합
+```
+git merge <다른 브랜치 이름>
+```
+- 리셋 전에는 무조건 커밋 한 번 해서 git reflog를 이용해 잘못 리셋한 것을 되돌릴 수 있도록 하는게 좋을 듯
+- git reset --hard: staging area, working directory까지 모두 리셋(변경사항 날아간다)
+- git reset --mixed: working directory는 그대로,  staging area는 리셋(git add 전 상태로 돌린다.)
+- git reset --mixed: working directory는 그대로,  staging area도 그대로(git add 이후, git commit 전 상태로 돌아간다.)
+```
+git reset <--옵션> <커밋아이디>
+```
