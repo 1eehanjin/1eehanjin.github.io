@@ -1,0 +1,11 @@
+---
+title:  "공부할 것 정리"
+excerpt : 공부할 것 정리
+categories:
+  - 기타
+tags:
+  - 기타
+toc: true
+toc_sticky: true
+---
+#1. 정리
