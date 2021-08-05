@@ -1,8 +1,14 @@
 ---
-layout: post
 title:  "github.io 블로그 가이드라인"
-date:   2021-08-04 23:30:36 +0530
-categories: 기타
+date:   2021-08-04 10:30:36 -0900
+excerpt : 블로그 쓰는 기본 양식 정리 
+categories:
+  - 기타
+tags:
+  - 기타
+  - 블로그
+toc: true
+toc_sticky: true
 ---
 # 1. 글 등록하기
 
@@ -32,36 +38,39 @@ git push -u origin master
 
 ```
 ---
-title:  "글 제목"
-excerpt: "간단 설명"
-
+title:  "github.io 블로그 가이드라인"
+date:   2021-08-04 10:30:36 -0900
+excerpt : 블로그 쓰는 기본 양식 정리 
 categories:
-  - 카테고리1
+  - A
 tags:
-  - 태그1
-last_modified_at: 2019-04-13T08:06:00-05:00
+  - B
+toc: true
+toc_sticky: true
 ---
 YFM에서 정의한 제목을 이중 괄호 구문으로 본문에 추가할 수 있다.
-이 글의 제목은 {{ page.title }}이고
-마지막으로 수정된 시간은 {{ page.last_modified_at }}이다.
+이 글의 제목은 {{ page.title }}이다.
+toc는 목차를 위한 옵션이다.
 ```
 
->YFML(YAML Front Matter)
+>YFML(YAML Front Matter)  
 >
 >markdown 파일 최상단에 위치하며 ---로 시작과 끝 표시
 >오픈 소스 프로젝트에서 많이 사용하는 데이터 형식인 YAML을 사용하여  글의 제목, 날짜 등을 정의한 것이다.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
-
 # 3. markdown 문법
 
 >markdown?
-
+>
 >텍스트 기반의 마크업 언어로 깃허브의 readme 작성하는데 많이 사용함
 
-### 3.1. 텍스트 줄바꿈
+관련 링크로 대체
+
+[블로그 1](
+https://theorydb.github.io/envops/2019/05/22/envops-blog-how-to-use-md/#markdown-%EB%AC%B8%EB%B2%951%EB%B0%98%EB%93%9C%EC%8B%9C-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%98%EB%8A%94) 
+
+[블로그 2](
+https://ansohxxn.github.io/blog/markdown/
+)
+
 
