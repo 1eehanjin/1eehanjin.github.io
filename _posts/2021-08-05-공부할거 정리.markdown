@@ -8,46 +8,44 @@ tags:
 toc: true
 toc_sticky: true
 ---
-# 1. 공부할 책  
+- 8/23 업데이트
 
-## 1.1. 한 권으로 읽는 컴퓨터 구조와 프로그래밍  
-## 1.2. 클린 코드  
+# 진행 중
 
-# 2. 모동숲라이프 유지보수  
+## 공부할 책  
+### 한 권으로 읽는 컴퓨터 구조와 프로그래밍  
+### 클린 코드 
+- ~11장 1회독, ~6장 1차 정리 (8/23)
 
-## 2.1 급한 일  
+## 디자인 원칙 정립
 
-- 광고 패키지 업데이트
-- applovin 미디에이션
-- 세금 정보 업데이트
-- 검색 버그 수정
-- 날아간 1.11.0 데이터 업데이트
+## 개발 공부 - flutter  
+### 기초 도서 완독
+### UI 도서 코드 리뷰
+- 플러터 UI 입문 ~3장 (8/22)
+### getx, bloc, provider
+### inherited widget정리, final static 차이?
+### flutter firebase 예제 프로젝트 리뷰
+### 앱 애니메이션 관련 코드 정리
 
-## 2.2 해야하는 일  
-
-- 검색 알고리즘 수정
-- 전체적인 디자인, 코드 리뷰
-- 번역 업데이트(이벤트 번역 추가)
-- 플러터 버전 업데이트
-
-# 3. 기타 공부  
-
-- [cocoapod, podfile?](https://points.tistory.com/69)
-- [flutter podfile dependencies](https://tsdev-tech.tistory.com/3)
-- 모바일 디자인 원칙 정립
-
-# 4. 개발 공부 - flutter  
-
-- google_mobile_ads 패키지 정리
-- 기초 도서 완독
-- getx 공부
-- flutter firebase 예제 프로젝트 리뷰
-- inherited widget , final static 차이?
-- 앱 애니메이션 관련 코드 정리
-
-# 5. 개발 공부 - unity  
-
+## 개발 공부 - unity
 - 기본 프로젝트 리뷰
 - shader 관련 공부
 - obi 프로젝트 뜯어보기
 
+
+# 완료
+
+## 모동숲라이프 유지보수
+- 광고 패키지 업데이트
+- 세금 정보 업데이트
+- 검색 버그 수정
+- 날아간 1.11.0 데이터 업데이트
+- 검색 알고리즘 수정
+- 번역 업데이트(이벤트 번역 추가)
+
+## 개발 공부
+- cocoapod, podfile?
+- flutter podfile dependencies
+- 객체지향 5원칙
+- 객체지향 디자인 패턴
