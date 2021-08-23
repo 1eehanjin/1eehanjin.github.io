@@ -1,10 +1,11 @@
 ---
-title:  "공부할 것 정리"
-excerpt : 공부할 것 정리
+title:  "개발 공부"
+excerpt : 개발 공부
 categories:
-  - 기타
+  - 개발
 tags:
-  - 기타
+  - 개발
+  - 공부
 toc: true
 toc_sticky: true
 ---

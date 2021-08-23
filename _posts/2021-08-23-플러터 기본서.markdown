@@ -1,0 +1,146 @@
+---
+title:  "플러터 기본서"
+excerpt : 모바일 앱 개발을 위한 다트 & 플러터 필요한 내용 정리 
+categories:
+  - 플러터
+tags:
+  - 개발
+  - 플러터
+toc: true
+toc_sticky: true
+---
+# 분류 안됨
+- 문자열 출력할 때 $변수 형태도 가능
+
+- private, public, protected 키워드가 없다. 따라서 해당 라이브러리 내에 private 하려면 식별자(변수명, 함수명) 앞에 _를 붙인다.
+
+- 함수에서 {}: 이름 있는 선택 매개변수, []: 위치적 선택 매개변수
+
+- 익명 함수의 기본 형태는 다음과 같다.
+```
+(매개변수명) { 표현식; };
+ex) (a, b) { a + b; };
+```
+- 람다식의 기본 형태는 다음과 같다. 익명 함수와의 차이는 결국 {}; 를 => 로 변경한 것 밖에 없다.
+```
+(매개변수명) => 표현식;
+ex) (a, b) => a - b;
+```
+
+- as: 형 변환 연산자로, 다른 타입으로 변환은 되지 않고 상위 타입으로 변경할 수 있다.
+
+- is: 객체가 특정 타입이면 true
+
+- assert는 조건식이 거짓이면 에러가 발생한다. 기본 형태는 다음과 같다.
+```
+assert(조건식);
+ex) assert(a>0);
+```
+
+- 기본 생성자
+클래스를 구현할 때 생성자를 생략하면 기본 생성자가 자동으로 제공된다. 기본 생성자는 클래스명과 동일하면서 인자가 없다. 또한 기본 생성자는 부모 클래스의 인수가 없는 생성자(기본 생성자)를 호출한다.
+기본 생성자는 상속되지 않는다. 자식 클래스에서 아무 생성자도 선언하지 않으면 기본 생성자만 갖는다.
+
+- 이름 있는 생성자
+한 클래스 내에 많은 생성자를 생성하거나 생성자를 명확히 하기 위해서 사용할 수 있다. 이름 있는 생성자를 선언하면 기본 생성자는 생략할 수 없다.
+```
+main(){
+    var person = Person();
+    var init = Person.init();
+}
+
+class Person{
+    Person(){
+        print("Person 생성자");
+    }
+    
+    Person.init(){
+        print("Person.init 생성자")
+    }
+}
+```
+
+- 초기화 리스트
+초기화 리스트를 사용하면 생성자의 구현부가 실행되기 전에 인스턴스 변수를 초기화할 수 있다. 초기화 리스트는 생성자 옆에 :으로 선언할 수 있다.
+```
+생성자: 초기화 리스트{
+}
+
+ex)
+Person() : name = 'Kim'{
+    print('This is Person($name) Constructor!');
+}
+```
+
+- 리다이렉팅 생성자
+초기화 리스트를 약간 응용하면 리다이렉팅을 위한 생성자를 만들 수 있다. 이러한 생성자는 본체가 비어 있고 메인 생성자에게 위임하는 역할을 한다.
+```
+main(){
+    var person = Person.initName('Kim');
+}
+
+class Person{
+    String name;
+    int age;
+    
+    Person.initName(String name) : this(name, 20);
+    
+    Person(this.name, this.age){}
+}
+```
+
+- 상수 생성자
+상수 생성자는 생성자를 상수처럼 만들어 준다. 해당 클래스가 상수처럼 변하지 않는 객체를 생성한다는 것이다. 상수 생성자를 만들기 위해선 인스턴스 변수가 모두 final이어야 한다. 또한 생성자는 const 키워드가 붙어야 한다.
+
+```
+main(){
+    Person person1 = const Person('Kim', 20); 
+    Person person2 = const Person('Kim', 20);
+    Person person3 = new Person('Kim', 20);
+    Person person4 = new Person('Kim', 20);
+    
+    //person1 == person2 != person3 != person4
+    
+}
+
+class Person{
+    final String name;
+    final num age;
+    
+    const Person(this.name, this.age);
+}
+```
+
+- 팩토리 생성자
+팩토리 생성자는 팩토리 패턴을 사용하기 편리하다. 팩토리 패턴을 사용하면 해당 클래스의 인스턴스를 매번 생성하지 않아도 된다. 보통 자식 클래스의 인스턴스를 리턴받는다. 
+인스턴스 생성을 자식 클래스에게 위임한 것이다. 팩토리 패턴을 사용할 때 유용하도록 다트가 자체적으로 제공하는 것이 팩토리 생성자이다.
+```
+class Person {
+    factory Person(String type){
+        switch (type){
+            case 'Student':
+                return Student();
+            case 'Employee':
+                return Employee();
+        }
+    }
+}
+
+class Student extends Person{
+...
+}
+
+class Employee extends Person{
+...
+}
+```
+
+- 여러 추상 클래스의 임플리먼트
+추상 클래스는 abstract, implements 키워드를 사용해야 한다.
+```
+class Developer implements Person, Junior{
+...
+}
+```
+
+93p 제네릭부터 이어서 하면 댐
