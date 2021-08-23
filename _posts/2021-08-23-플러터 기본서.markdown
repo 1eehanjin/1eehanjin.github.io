@@ -48,7 +48,6 @@ main(){
     var person = Person();
     var init = Person.init();
 }
-
 class Person{
     Person(){
         print("Person 생성자");
@@ -65,7 +64,6 @@ class Person{
 ```
 생성자: 초기화 리스트{
 }
-
 ex)
 Person() : name = 'Kim'{
     print('This is Person($name) Constructor!');
@@ -78,7 +76,6 @@ Person() : name = 'Kim'{
 main(){
     var person = Person.initName('Kim');
 }
-
 class Person{
     String name;
     int age;
@@ -102,7 +99,6 @@ main(){
     //person1 == person2 != person3 != person4
     
 }
-
 class Person{
     final String name;
     final num age;
@@ -125,11 +121,9 @@ class Person {
         }
     }
 }
-
 class Student extends Person{
 ...
 }
-
 class Employee extends Person{
 ...
 }
