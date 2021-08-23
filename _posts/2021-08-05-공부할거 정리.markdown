@@ -47,6 +47,7 @@ toc_sticky: true
 
 # 5. 개발 공부 - unity  
 
+- 기본 프로젝트 리뷰
 - shader 관련 공부
 - obi 프로젝트 뜯어보기
 
