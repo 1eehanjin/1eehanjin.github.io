@@ -11,21 +11,48 @@ toc_sticky: true
 ---
 # 1. 공부할 책  
 
+
+
 ## 1.1. 한 권으로 읽는 컴퓨터 구조와 프로그래밍  
+
+
+
 ## 1.2. 클린 코드  
 - [정리본(내 블로그)](https://1eehanjin.github.io/%EC%BD%94%EB%94%A9%20%EB%8F%84%EC%84%9C/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C/)
 
+
+
+
+
 # 2. 디자인
+
+
+
+
 
 # 3. 기타 개발
 
+
+
 - [cocoapod, podfile?(외부 정리글)](https://points.tistory.com/69)
 - [flutter podfile dependencies(외부 정리글)](https://tsdev-tech.tistory.com/3)
-
 - [객체지향 5원칙(외부 정리글)](https://www.nextree.co.kr/p6960/)
 - [객체지향 디자인 패턴 1(유튜브 영상)](https://www.youtube.com/watch?v=lJES5TQTTWE)
 - [객체지향 디자인 패턴 2(유튜브 영상)](https://www.youtube.com/watch?v=q3_WXP9pPUQ)
+
+
+
+
+
 # 4. flutter  
+
+
+
+## 4.1 기본서 정리
+
+- [내 블로그](https://1eehanjin.github.io/%ED%94%8C%EB%9F%AC%ED%84%B0/%ED%94%8C%EB%9F%AC%ED%84%B0-%EA%B8%B0%EB%B3%B8%EC%84%9C/)
+
+
 
 
 # 5. unity  
