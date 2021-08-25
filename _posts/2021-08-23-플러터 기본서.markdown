@@ -26,7 +26,7 @@ ex) (a, b) { a + b; };
 (매개변수명) => 표현식;
 ex) (a, b) => a - b;
 ```
-  
+
 - as: 형 변환 연산자로, 다른 타입으로 변환은 되지 않고 상위 타입으로 변경할 수 있다.  
 
 - is: 객체가 특정 타입이면 true. 
@@ -36,7 +36,7 @@ ex) (a, b) => a - b;
 assert(조건식);
 ex) assert(a>0);
 ```
-  
+
 - 기본 생성자. 
 클래스를 구현할 때 생성자를 생략하면 기본 생성자가 자동으로 제공된다. 기본 생성자는 클래스명과 동일하면서 인자가 없다. 또한 기본 생성자는 부모 클래스의 인수가 없는 생성자(기본 생성자)를 호출한다.
 기본 생성자는 상속되지 않는다. 자식 클래스에서 아무 생성자도 선언하지 않으면 기본 생성자만 갖는다.
@@ -58,7 +58,7 @@ class Person{
     }
 }
 ```
-  
+
 - 초기화 리스트. 
 초기화 리스트를 사용하면 생성자의 구현부가 실행되기 전에 인스턴스 변수를 초기화할 수 있다. 초기화 리스트는 생성자 옆에 :으로 선언할 수 있다.
 ```
@@ -69,7 +69,7 @@ Person() : name = 'Kim'{
     print('This is Person($name) Constructor!');
 }
 ```
- 
+
 - 리다이렉팅 생성자. 
 초기화 리스트를 약간 응용하면 리다이렉팅을 위한 생성자를 만들 수 있다. 이러한 생성자는 본체가 비어 있고 메인 생성자에게 위임하는 역할을 한다.
 ```
@@ -135,5 +135,272 @@ class Developer implements Person, Junior{
 ...
 }
 ```
+
+- 제네릭
+
+  제네릭은 타입 매개변수를 통해 다양한 타입에 대한 유연한 대처를 가능하게 한다.
+
+  List 가 그 예이다. <> 부분에 타입 매개변수를 지정한다.
+
+  ```dart
+  abstract class List<E> implements EfficientLengthIterable<E> {
+    ...
+    void add(E value);
+    ...
+  }
+  ```
+
+- 제네릭 메서드
+
+  제네릭은 클래스뿐만 아니라 메서드에도 사용할 수 있다. 메서드의 리턴 타입, 매개변수를 제네릭으로 지정할 수 있다.
+
+  ```dart
+  void main(){
+    var person = Person();
+    print(person.getName<String>('Kim'));
+  }
   
-93p 제네릭부터 이어서 하면 댐
+  class Person{
+    T getName<T>(T param){
+      return param;
+    }
+  }
+  ```
+
+- 비동기 프로그래밍
+
+  요청한 작업의 결과를 기다리지 않고 바로 다음 작업으로 넘어감으로써 프로그램의 실행을 멈추지 않는다.
+
+  
+
+  - Isolate
+
+    isolate는 다트의 모든 코드가 실행되는 공간이다. 싱글 스레드를 갖고 이벤트 루프(이벤트 큐에 쌓여있는 작업들을 오래된 순으로 하나씩 가져와서 처리하는 역할) 를 통해 작업을 처리한다. 기본 isolate인 main isolate는 런타임에 생성된다.
+
+    isolate가 싱글 스레드이지만 다트가 자체적인 비동기 프로그래밍을 지원하기 때문에 비동기 작업도 이벤트 루프에 의해서 적절히 처리된다. 또한 main isolate에서 무거운 작업으로 인해 반응성이 떨어진다면 추가로 isolate를 생성할 수 있다. 그러면 스레드가 2개가 되는 것이다. 다만 기존의 언어에서 사용하는 스레드와 차이가 있다.
+
+    자바 등의 언어에서 사용하는 스레드는 스레드가 서로 메모리릉 공유한다. 하지만 isolate의 스레드는 자체적으로 메모리를 가지고 있다. 즉 메모리 공유가 되지 않는다. 따라서 두 isolate가 함께 작업하려면 message를 주고받아야 한다. 하지만 멀티스레드 사용 시 늘 주의해야 하는 공유자원에 대한 컨트롤에 신경 쓰지 않아도 된다.
+
+  - isolate 생성하기
+
+    새로운 isolate는 spawn을 통해서 만들 수 있다.
+
+    ```dart
+    import 'dart:isolate';
+    
+    void main(){
+    	Isolate.spawn(isolateTest, 1);
+      Isolate.spawn(isolateTest, 2);
+      Isolate.spawn(isolateTest, 3);
+    }
+    
+    isolateTest(var m){
+      print('isolate no.$m');
+    }
+    ```
+
+  - isolate간 message 주고 받기
+
+    ```dart
+    import 'dart:isolate';
+    
+    main(){
+      int counter = 0;
+      
+      ReceivePort mainReceivePort = new ReceivePort();
+      
+      mainReceivePort.listen((fooSendPort){
+        if (fooSendPort is SendPort){
+          fooSendPort.send(counter++);
+        } else{
+          print(fooSendPort);
+        }
+      });
+      
+      for(var i = 0; i < 5; i++){
+        Isolate.spawn(foo, mainReceivePort.sendPort);
+      }
+    }
+    
+    foo(SendPort mainSendPort){
+      ReceivePort fooReceivePort = new ReceivePort();
+      mainSendPort.send(fooReceivePort.sendPort);
+      
+      fooReceivePort.listen((msg){
+        mainSendPort.send('received: $msg');
+      });
+    }
+    ```
+
+    
+
+  - Future, async, await
+
+    future는 어떤 작업 결과값을 나중에 받기로 약속하는 것이다. 즉 요청한 작업의 결과를 기다리지 않고 바로 다음 작업으로 넘어간다. 그 후 작업이 완료되면 결과를 받는 방식으로 비동기 처리를 하는 것이다.
+
+    또는 작업이 완료될 때까지 기다렸다가 결괏값을 받고 다음 작업으로 넘어갈 수도 있다. 이 경우는 async, await를 사용하면 가능하다.
+
+    future는 세 가지 상태를 가진다. Uncompleted, Completed(data), Completed(error)
+
+    future는 상태별로 다른 작업과 마찬가지로 event loop에 의해서 순차적으로 처리된다. 처음 future를 생성하여 작업을 시작하면 Uncompleted future가 event queue에 들어간다. 해당 작업이 완료되기 전까지는 다른 작업들이 event queue에 들어가고 event loop에 의해서 꺼내져 처리된다. 그러다 future가 작업을 끝내면 completed future가 event queue에 들어가고 event loop에 의해 선택되면 completed future가 가진 결과값이나 에러에 대한 처리를 하는 것이다.
+
+  - Future 에러처리
+
+    completed future가 결괏값 대신에 에러를 가졌을 때는 onError를 통해서 처리된다.
+
+    ```dart
+    main(){
+      print('start');
+      
+      Future<String> myFuture = new Future((){
+        for(int i = 0 ; i < 1000000; i++){
+        }
+        return throw Exception('Failed: data is too many');
+      });
+      
+      myFuture.then((data){
+        print(data);
+      },onError: (e){
+        print(e);
+      })
+        
+      print('do something');
+    }
+    ```
+
+    onError와 catchError는 에러를 처리한다는 역할은 동일하지만 차이점이 있다. onError는 future에서 발생한 에러만 처리할 수 있다. 대신 catchErrorsms then()의 첫 번째 인자인 익명 함수 내부에서 발생한 에러까지 처리할 수 있다.
+
+    ```dart
+    main(){
+      print('start');
+      
+      var myFuture = getData();
+      myFuture.then((data) => print(data))
+        .catchError((e) => print(e));
+      
+      print('do something');
+    }
+    
+    Future<String> getData(){
+      ...
+    }
+    ```
+
+    
+
+  - Stream
+
+    future는 하나의 데이터를 then()에서 수신했다. 반면 stream은 연속된 데이터를 listen()을 통해서 비동기적으로 처리할 수 있다.
+
+    예를 들어 실시간 데이터를 처리할 때 future는 이미지 파일 하나를 다운로드하여 보여줄 때 적합하다면 stream은 동영상을 보여주는데 사용할 수 있다. stream은 흔히 말하는 스트리밍 서비스의 동작 방식과 다를 바 없는 것이다.
+
+    stream은 구독자(관찰자) 패턴이다. 구독자가 관찰 대상을 구독하여 관찰 대상에 변화가 발생하면 구독자에게 그 변화를 알려준다.
+
+    
+
+    하나의 데이터에 대한 이벤트를 발생하는 stream을 생성한다.
+
+    ```dart
+    main(){
+      print('start');
+      var stream = Stream.value(100).listen((dynamic x) => print('$x'));
+      print('do something');
+    }
+    ```
+
+    Stream.periodic()은 특정 주기로 반복적으로 이벤트를 발생하는 stream을 만든다. 첫 번째 인자는 Duration() 객체이고, 두 번째 인자는 이벤트에서 발생한 값을 계산하는 함수이다. take()는 몇 회까지 반복할지 정해주는 역할을 한다.
+
+    listen()은 stream의 변화를 관찰하여 변화가 있을 때, 즉 새로운 데이터 입력 시 해당 데이터를 출력해준다. 
+
+    ```dart
+    main(){
+    	print('start');
+    	var stream = Stream.periodic(Duration(seconds: 1), (x)=> x).take(5);
+      stream.listen(print);
+    }
+    ```
+
+    ```dart
+    main(){
+    	print('start');
+    	var stream = Stream.periodic(Duration(seconds: 1), (x) => x+1).take(5).listen((x) => print('$x'));
+      
+      Stream.fromIterable(['one', '2.5', 'three', 4, 5])
+        .listen((dynamic x) => print('$x'));
+      
+      Stream.fromFuture(getData()).
+        listen((x) => print('$x'));
+    }
+    
+    Future<String> getData() async{
+      return Future.delayed(Duration(seconds: 3), () => 'after 3 seconds');
+    }
+    ```
+
+  - StreamController 사용하기
+
+    비동기 함수에 의해서 전달되는 형태가 아니라 stream에 이벤트를 직접 지정해주고 싶다면 StreamController를 사용한다. StreamController로 stream을 만들고 이벤트를 채워 넣으면 된다.
+
+    ```dart
+    import 'dart:async';
+    
+    main(){
+    	print('start');
+    	
+    	StreamController streamCtrl = StreamController();//스트림 컨트롤러 생성
+    	streamCtrl.strea.listen((x) => print(x)); //구독을 등록한다.
+    	
+    	streamCtrl.add(100); //add()를 통해 이벤트를 추가한다.
+    	streamCtrl.add('test');
+    	streamCtrl.add(200);
+    	streamCtrl.add(300);
+    	streamCtrl.close();//stream을 닫는다.
+    }
+    ```
+
+    하나의 stream에 대한 구독자(listen)은 하나만 등록할 수 있다. 만약 2개 이상 등록하고 싶으면 broadcast를 사용해야 한다.
+
+    ```dart
+    import 'dart:async';
+    
+    main(){
+      print('start');
+      
+      var stream = Stream.periodic(Duration(seconds: 1), (x) => x + 1).take(3);
+      stream.listen(print);
+      //stream.listen(print) 하나 더 등록하면 에러난다.
+      
+      StreamController streamCtrl = streamController.broadcast();
+      streamCtrl.stream.listen((x) => print('listen 1: $x'));
+      streamCtrl.stream.listen((x) => print('listen 2: $x'));
+      
+      streamCtrl.add(100);
+      streamCtrl.add(200);
+      streamCtrl.add(300);
+      streamCtrl.close();
+     }
+    ```
+
+  - Async*, yield 사용하기
+
+    제너레이터(Generator) 함수는 반복 가능한 함수이다. 보통 함수는 return을 맞이하면 종료된다. 하지만 제너레이터 함수는 return 대신에 yield를 사용한다. 제너레이터 함수를 만드는 방법은 비동기 함수와 비슷하게 함수명 뒤에 async\*라는 키워드를 붙인다. 이러한 제너레이터 함수의 리턴 타입은 Stream이다. 다시 말하면 Stream 함수를 만들기 위해서 async\*를 사용하는 것이다.
+
+    ```dart
+    import 'dart:async';
+    
+    main(){
+      var stream = getData();
+      stream.listen((x) => print(x));
+    }
+    
+    Stream<int> getData() async*{
+      for(int i = 0; i < 5; i++){
+        yield i;
+      }
+    }
+    ```
+
+    
+
+# 3장
+
