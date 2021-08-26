@@ -14,6 +14,7 @@ toc_sticky: true
 - 문자열 출력할 때 $변수 형태도 가능. 
 - private, public, protected 키워드가 없다. 따라서 해당 라이브러리 내에 private 하려면 식별자(변수명, 함수명) 앞에 _를 붙인다.    
 - 함수에서 {}: 이름 있는 선택 매개변수, []: 위치적 선택 매개변수.   
+- 매개변수의 _과 __는 사용하지 않는 매개변수를 나타낸다. 문법적인 요소가 아니고 dart 스타일 가이드에 명시된 내용이다.
 - 익명 함수의 기본 형태는 다음과 같다.   
 ```
 (매개변수명) { 표현식; };
@@ -25,10 +26,9 @@ ex) (a, b) { a + b; };
 ex) (a, b) => a - b;
 ```
 
+- Builder 부분의 익명함수의 매개변수의 원형은 (BuildContext context, T value, Widget child)이다. 
 - as: 형 변환 연산자로, 다른 타입으로 변환은 되지 않고 상위 타입으로 변경할 수 있다.  
-
 - is: 객체가 특정 타입이면 true. 
-  
 - assert는 조건식이 거짓이면 에러가 발생한다. 기본 형태는 다음과 같다.
 ```
 assert(조건식);
@@ -513,9 +513,79 @@ class Developer implements Person, Junior{
 
   ```dart
   Provider<T>.value(
-  	
+  	value: 전달할 데이터,
+    child: Provider의 데이터 상태를 사용할 위젯,
+  )
+   
+  //ex)
+  Provider<String>.value(
+  	value: 'Sample Data',
+    child: MaterialApp(),
   )
   ```
 
+  Provider의 데이터 상태를 사용할 범위를 지정해야 하는데 child 매개변수에 위젯을 지정하면 그 위젯의 자식 위젯까지 모두 포함된다. 따라서 child를 MaterialApp()으로 하면 앱 전체에서 사용할 수 있다.
+
+- 데이터를 사용하는 방법은 Provider.of() 또는 Consumer()를 사용하면 된다.
+
+  ```dart
+  //ex)
+  Provider.of<String>(context, listen: false);
   
+  //또는
+  
+  Consumer<String>(
+    builder: (context, value, child){
+      return Text('$value');
+    }
+  )
+  ```
+
+  Provider.of() 는 데이터에 접근하여 사용은 하지만 UI 변경은 필요 없는 경우에 사용할 수 있다. 변경에 대한 알림을 받지 않기 위해서 listen 매개변수의 값을 false로 하면 된다.
+
+  Consumer()는 데이터가 갱신되어 상태 변경이 발생하면 builder에 지정된 위젯만 재빌드한다. 따라서 해당 데이터 갱신과 무관한 위젯까지 재빌드하는 비효율적인 동작을 하지 않는다. 그러므로 꼭 상태 변경이 필요한 위젯에 사용하는 것이 좋다.
+
+- MultiProvider를 사용하면 다수의 위젯을 children으로 처리한 것처럼 providers로 처리할 수 있다. 그러면 가독성이 좋아진다. 
+- 기존에는 변경된 데이터를 UI에 표시하기 위해서 setState()를 사용하여 재빌드를 했다. 플러터에는 이와 동일한 역할을 하는 ChangeNotifier 클래스를 제공한다. ChangeNotifierProvider는 ChangeNotifier와 같이 사용하여 상태 변경에 대한 알림을 받고 바로 UI에 적용할 수 있다.
+- Todo: Provider, bloc, getx 상태관리 정리
+
+
+
+# 7. 애니메이션
+
+
+
+## 7.1 암시적 애니메이션
+
+
+
+- 암시적 애니메이션은 속성에 새로운 속성을 지정하고 setState()와 같은 함수로 재빌드하도록 하면 애니메이션을 구동한다. 예를 들어 width를 100으로 지정한 상태에서 200으로 변경한 후 재빌드할 때 크기가 애니메이션으로 움직이면서 커진다.
+- 암시적 애니메이션은 크게 두 가지로 나뉜다. 하나는 내장된 암시적 애니메이션인 AnimatedFoo이고 다른 하나는 내장된 애니메이션이 없는 위젯에 애니메이션을 적용할 때 사용하는 TweenAnimationBuilder이다. 이 두 가지를 살펴보자.
+
+
+
+#### 내장된 암시적 애니메이션
+
+- 플러터에 기본적으로 내장된 암시적 애니메이션은 AnimationFoo와 같은 형태의 이름을 가진다. Foo는 앞서 살펴보았던 몇몇 위젯들로 대체하면 된다. 예를 들면 Container 위젯에 애니메이션을 적용하려면 AnimatedContainer를 사용하면 된다.
+- 애니메이션을 적용하지 않고도 동적으로 크기를 변경할 수 있다. 하지만 시각적인 효과에서 오는 차이가 크다. 즉 앱 퀄리티가 낮아진다.
+
+#### TweenAnimationBuilder
+
+- 기본으로 애니메이션이 내장되지 않은 위젯도 있다. 이런 위젯도 애니메이션 효과를 줄 수 있다. 바로 TweenAnimationBuilder를 사용하면 된다. TweenAnimationBuilder는 대상에 대한 값이 변경할 때 위젯을 그 값에 따라 애니메이션화하도록 한다. 이 때 애니메이션화되는 타입은 사용하는 Tween의 종류로 정해진다. 예를들어 Color 위젯을 통해 색상을 변경하는 작업이라면 ColorTween을 사용한다. 기본 형태인 Tween은 애니메이션의 처음과 끝 값을 double형의 0.0~1.0 사이의 값으로 적절히 매핑시켜 준다.
+
+## 7.2 명시적 애니메이션
+
+- 암시적 애니메이션은 기본 애니메이션을 제공한다. 기본 애니메이션은 반복성이 없다. Tween에도 begin과 end가 있다. 즉 한 번 진행된 후 끝이다. 하지만 명시적 애니메이션은 애니메이션 동작이 처음으로 다시 되돌아가거나 반복적으로 동작하는 등의 제어를 할 수 있다. 명시적 애니메이션은 FooTransition의 형태이다.
+- FooTransition을 사용할 때는 크게 세 단계를 생각하면 된다.
+  1) State에 SingleTickerProviderStateMixin 상속
+  2) AnimationController 생성
+  3) FooTransition 생성
+
+## 7.3 Hero 위젯
+
+- 화면 이동 전후에 애니메이션을 적용할 위젯을 Hero 위젯으로 감싸면 된다. 한 화면에서 다른 화면으로 이동할 때 애니메이션 효과를 제공한다.
+
+
+
+
 
