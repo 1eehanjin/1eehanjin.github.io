@@ -1,0 +1,181 @@
+---
+title:  "디자인 가이드라인"
+excerpt : 디자인 가이드라인 정리
+categories:
+  - 디자인
+tags:
+  - 디자인
+toc: true
+toc_sticky: true
+---
+
+
+# 가이드라인 정리
+
+
+
+- 앱 개발에 사용할 디자인 가이드라인 정리
+
+- 아래의 디자인 가이드라인 문서를 참고함
+
+- [spoqa 디자인 가이드라인](https://bi.spoqa.com/)
+- [삼성 one UI 가이드라인](https://www.design.samsung.com/kr/contents/one-ui/download/oneui_design_guide_kor.pdf)
+
+- 디자이너 마디아 유튜브 채널
+
+
+
+## 1. 영역 수치
+
+
+
+### 1.1 사이드 마진
+
+- 화면 양쪽 끝의 마진
+- 24 를 일반적으로 사용하고, 때때로 30이나 36 사용하면 될 듯
+
+
+
+### 1.2 그리드 시스템
+
+- 기본적으로 그리드 시스템을 사용하는 듯?
+- column을 12개로 나누고, 사이 마진을 24~30 으로 하는 듯?
+- TODO: 그리드 시스템이 무엇인지 공부 필요
+- TODO: 구현시 일반적인 방법이 맞나? 조사 필요
+  - 고정적인 수치를 줄 수 있는 것은 주고(마진, 텍스트) 분할이 필요한 것만 영역 나눠서 구현하면 될 듯?
+
+![image-20210914103655449](https://tva1.sinaimg.cn/large/008i3skNgy1gufwona4rfj61050u0n1r02.jpg)
+
+
+
+### 1.3 마진
+
+- 비슷한 요소에 대한 마진은 똑같이 해야 한다. -> 마진 파일에서 정의
+- 종류가 너무 많아서 짝수 크기로 적당히 설정해서 하면 될 듯?
+  6 12 16 20 24 30 32 60 70 80 100 ...
+- TODO: 그리드 시스템 마진 정의랑 연관? 조사 필요
+
+
+
+## 2. 타이포그래피
+
+### 2.1 폰트
+
+- 한글: Noto Sans CJK KR (자간: -25)
+- 영어: Roboto
+- 숫자: Roboto
+
+### 2.2 사이즈, 굵기
+
+
+
+- Spoqa font Size
+
+- ![image-20210914105532876](https://tva1.sinaimg.cn/large/008i3skNgy1gufx80mz4yj617j0u0wif02.jpg)
+- one UI font Size
+- ![image-20210914092722518](https://tva1.sinaimg.cn/large/008i3skNgy1gufxbv6e8pj60sw11igo402.jpg)
+- 
+
+### 2.3 색상
+
+
+
+- 일반적인 텍스트 색상엔 회색조 색상을 사용한다.
+- TODO: 아래 후보군 두개중 정하기
+
+![image-20210914105722150](https://tva1.sinaimg.cn/large/008i3skNgy1gufx9wsazej60i807cdft02.jpg)
+
+![image-20210914105739263](https://tva1.sinaimg.cn/large/008i3skNgy1gufxa7apkkj619o0katan02.jpg)
+
+
+
+
+
+* 주요 텍스트 색상으로는 브랜드 컬러를 사용한다.
+
+- 긍정, 부정을 의미하는 텍스트에는 아래의 컬러를 사용한다.
+
+![image-20210914105822967](https://tva1.sinaimg.cn/large/008i3skNgy1gufxaytvznj60yk0isgmr02.jpg)
+
+
+
+## 3. 컬러
+
+- ![image-20210914101133906](https://tva1.sinaimg.cn/large/008i3skNgy1gufvyblcr1j60ow0jsabf02.jpg)
+- https://bi.spoqa.com/color.html
+
+
+
+## 4. 위젯별 정의
+
+
+
+## 5. UX 디자인 원칙
+
+
+
+
+
+
+
+- ![image-20210914091406471](../../../Library/Application Support/typora-user-images/image-20210914091406471.png)
+
+
+
+- ![image-20210914091439651](../../../Library/Application Support/typora-user-images/image-20210914091439651.png)
+
+
+
+- ![image-20210914091512445](../../../Library/Application Support/typora-user-images/image-20210914091512445.png)
+
+
+
+- ![image-20210914091545888](../../../Library/Application Support/typora-user-images/image-20210914091545888.png)
+
+
+
+- ![image-20210914091620642](../../../Library/Application Support/typora-user-images/image-20210914091620642.png)
+
+
+
+- ![image-20210914091720090](../../../Library/Application Support/typora-user-images/image-20210914091720090.png)
+
+
+
+- ![image-20210914091811045](../../../Library/Application Support/typora-user-images/image-20210914091811045.png)
+
+
+
+- ![image-20210914091842557](../../../Library/Application Support/typora-user-images/image-20210914091842557.png)
+- ![image-20210914091917979](../../../Library/Application Support/typora-user-images/image-20210914091917979.png)
+- ![image-20210914091947286](../../../Library/Application Support/typora-user-images/image-20210914091947286.png)
+- ![image-20210914092031514](../../../Library/Application Support/typora-user-images/image-20210914092031514.png)
+- ![image-20210914092138413](../../../Library/Application Support/typora-user-images/image-20210914092138413.png)
+- ![image-20210914092056951](../../../Library/Application Support/typora-user-images/image-20210914092056951.png)
+- ![image-20210914092208608](../../../Library/Application Support/typora-user-images/image-20210914092208608.png)
+
+- ![image-20210914092303299](../../../Library/Application Support/typora-user-images/image-20210914092303299.png)
+
+- ![image-20210914092323465](../../../Library/Application Support/typora-user-images/image-20210914092323465.png)
+
+- ![image-20210914092359281](../../../Library/Application Support/typora-user-images/image-20210914092359281.png)
+- ![image-20210914092422957](../../../Library/Application Support/typora-user-images/image-20210914092422957.png)
+
+- ![image-20210914092507021](../../../Library/Application Support/typora-user-images/image-20210914092507021.png)
+- ![image-20210914092615821](../../../Library/Application Support/typora-user-images/image-20210914092615821.png)
+- ![image-20210914092631663](../../../Library/Application Support/typora-user-images/image-20210914092631663.png)
+
+- ![image-20210914092653442](../../../Library/Application Support/typora-user-images/image-20210914092653442.png)
+
+  
+
+- ![image-20210914092737923](../../../Library/Application Support/typora-user-images/image-20210914092737923.png)
+
+- ![image-20210914092804096](../../../Library/Application Support/typora-user-images/image-20210914092804096.png)
+
+- ![image-20210914092856565](../../../Library/Application Support/typora-user-images/image-20210914092856565.png)
+
+- ![image-20210914101133906](https://tva1.sinaimg.cn/large/008i3skNgy1gufvyblcr1j60ow0jsabf02.jpg)
+
+
+
