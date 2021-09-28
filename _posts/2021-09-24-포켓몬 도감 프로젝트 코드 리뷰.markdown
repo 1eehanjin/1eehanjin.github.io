@@ -1,0 +1,61 @@
+---
+title:  "포켓몬 도감 프로젝트 코드 리뷰"
+excerpt : 포켓몬 도감 프로젝트 코드 리뷰
+categories:
+  - 개발
+tags:
+  - 개발
+toc: true
+toc_sticky: true
+---
+
+# 0. 기본 설명
+
+
+
+- 출처: https://github.com/scitbiz/flutter_pokedex
+
+
+
+
+
+# 1. 
+
+- 컬러나 폰트같은거 정의할 때, 한 파일에 놓는 것 + 한 클래스 안에 넣어두면 나중에 호출하기 편함
+- 컬러, 폰트 static const로 넣어두기
+
+
+
+- 이미지도 많이 쓰는 이미지같은 경우 따로 정의해두면 좋다.
+
+
+
+- ```dart
+  textTheme: theme.textTheme.apply(
+            fontFamily: AppFonts.circularStd,
+            displayColor: AppColors.black,
+          ),
+  ```
+
+  - textTheme.apply()는 textTheme의 복사본을 리턴하는데, 전달한 인수가 있으면 해당 요소는 전달받은 것으로 변경하여 리턴한다.
+
+  - displayColor 는 headline4~headline1, caption의 텍스트 스타일 색상에 적용된다.
+  - bodyColor는 나머지 텍스트 스타일 색상에 적용된다.
+
+- ```dart
+  builder: (context, child) {
+          final data = MediaQuery.of(context);
+          final smallestSize = min(data.size.width, data.size.height);
+          final textScaleFactor = min(smallestSize / AppConstants.designScreenSize.width, 1.0);
+  
+          return MediaQuery(
+            data: data.copyWith(
+              textScaleFactor: textScaleFactor,
+            ),
+            child: child,
+          );
+        },
+  ```
+
+  
+
