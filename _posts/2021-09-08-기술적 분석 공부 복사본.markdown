@@ -1,0 +1,149 @@
+---
+
+title:  "펀딩비 분석"
+excerpt : 펀딩비
+categories:
+  - 코인
+  - 재테크
+tags:
+  - 코인
+  - 펀딩비
+  - 재테크
+toc: true
+toc_sticky: true
+---
+
+
+
+
+# 펀딩비 분석
+
+
+
+## 분석계획
+
+
+
+1. 기본적인 거래소 사용법
+2. 거래소 먹튀 리스크
+3. 거래소별 펀딩비 내역
+4. 거래소별 펀딩비 계산식
+5. 김프
+6. 예상 수익
+7. 테스트
+
+
+
+## 1. 기본적인 거래소 사용법
+
+
+
+1. USD, USDT 마켓 구분
+
+   
+
+   무포지션 = USD 마켓 1배숏 = USDT 무포지션
+
+   
+
+   USD 마켓에서는 들고있는 현물을 통해 거래한다. 따라서 기본적으로 1배 롱 포지션을 갖고있는 상태와 같다.
+
+   
+
+   USDT 마켓에서는 달러와 같은 가치를 가지는 스테이블 코인, 테더를 이용해서 거래한다. 기본적으로 어느 포지션도 잡지 않은 상태와 같다고 이해하면 된다.
+
+   
+
+   
+
+2. 교차, 격리 차이
+
+   
+
+   교차마진은 포지션의 강제청산에 대비하기 위하여 보유하고 있는 자금 전부를 증거금으로 사용한다.
+
+   진입가격과 청산가격의 갭이 커지기 때문에 강제청산의 확률을 낮출 수 있다.
+
+   
+
+   격리마진은 교차와 달리 포지션을 진입할 때 설정한 증거금만을 담보로 사용하는 투자방식이다.
+
+   강제청산시 계정잔액 전부가 소진되는 교차마진과는 달리 투입한 증거금만을 잃게 되므로, 리스크를 관리할 수 있다.
+
+   왜 격리로 해야 하는거지??
+
+   
+
+3. 주문/판매 ui, 용어 익히기
+
+   ![image-20211018150054719](https://tva1.sinaimg.cn/large/008i3skNgy1gvjfdv23ngj610w0u010t02.jpg)
+
+   ![image-20211018150315399](https://tva1.sinaimg.cn/large/008i3skNgy1gvjfg8ktvcj612m0u0ain02.jpg)
+
+4. 거래소 옮기는 중 리스크 분석
+
+   송금 사고: 지갑 주소와 네트워크가 모두 일치해야 한다.
+
+## 2. 거래소 먹튀 리스크 조사
+
+
+
+- 코인 파생상품 거래소 순위
+
+![image-20211018150731380](https://tva1.sinaimg.cn/large/008i3skNgy1gvjfknpfdnj61qu0u0jw402.jpg)
+
+![image-20211018150752815](https://tva1.sinaimg.cn/large/008i3skNgy1gvjfl16hjyj61r50u0tda02.jpg)
+
+
+
+바이낸스 / 바이비트 / 비트맥스 / FTX / 비트겟
+
+
+
+## 3. 거래소별 펀딩비 내역 (비트, 이더, 리플)
+
+바이낸스
+
+![image-20211018154121312](https://tva1.sinaimg.cn/large/008i3skNgy1gvjgjvbdaej60qm06sgma02.jpg)
+
+바이비트
+
+![image-20211018155008944](https://tva1.sinaimg.cn/large/008i3skNgy1gvjgt0b620j608w04st8w02.jpg)
+
+비트맥스
+
+![image-20211018155807482](https://tva1.sinaimg.cn/large/008i3skNgy1gvjh1b29poj60ta04sjro02.jpg)
+
+FTX
+
+![image-20211018160707889](https://tva1.sinaimg.cn/large/008i3skNgy1gvjhaop7xvj60em03gmx602.jpg)
+
+
+
+
+
+
+
+## 4. 거래소별 펀딩비 계산 식
+
+
+
+## 5. 김프
+
+![image-20211018162410789](https://tva1.sinaimg.cn/large/008i3skNgy1gvjhsfp6spj61ba0u0wk302.jpg)
+
+## 6. 예상수익
+
+
+
+연 10프로 
+
+
+
+## 7. 테스트
+
+
+
+
+
+ 
